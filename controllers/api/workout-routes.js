@@ -4,14 +4,13 @@ const { Workout } = require("../../models");
 //======post to create workout=========
 router.post("/workouts", async (req, res) => {
   try {
-    const workOutData = await Workout.create(req.body);
+    const workOutData = await Workout.create({});
     res.status(200).json(workOutData);
   } catch (err) {
       console.log(err);
       res.status(500).json(err);
     }
-  }
-);
+});
 
 //=========put workouts by id and push=========
 router.put("/workouts/:id", async (req, res) => {
@@ -68,7 +67,7 @@ router.get("/workouts/range", async (req, res) => {
 //=========delete workouts by id=========
 router.delete("/workouts", async (req, res) => {
   try {
-    const workOutData = await Workout.findByIdDelete(req.body);
+    await Workout.findByIdDelete(req.body);
     res.status(200).json(true);
   } catch (err) {
     res.status(500).json(err);
